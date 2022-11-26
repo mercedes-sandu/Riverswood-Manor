@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GameEvent : MonoBehaviour
+public static class GameEvent
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    /// <summary>
+    /// Handles the texture of the mouse cursor.
+    /// </summary>
+    public delegate void CursorHandler(bool interacting);
+    
+    /// <summary>
+    /// Detects when the mouse cursor should be changed.
+    /// </summary>
+    public static event CursorHandler OnCursorChange;
+    
+    /// <summary>
+    /// Changes the mouse cursor to the specified texture.
+    /// </summary>
+    /// <param name="interacting">True if we swap to the interacting cursor, false otherwise.</param>
+    public static void ChangeCursor(bool interacting) => OnCursorChange?.Invoke(interacting);
 }

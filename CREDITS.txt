@@ -8,5 +8,6 @@ Wooden Floor Materials: https://assetstore.unity.com/packages/2d/textures-materi
 Yughues Free Concrete Materials: https://assetstore.unity.com/packages/2d/textures-materials/concrete/yughues-free-concrete-materials-12951
 PBR Materials Sampler Pack: https://assetstore.unity.com/packages/2d/textures-materials/pbr-materials-sampler-pack-40112
 Portrait of a Woman: https://sketchfab.com/3d-models/portrait-of-a-woman-61fdcc3bde184224bb44e20116eb3091
+Crosshairs Plus: https://assetstore.unity.com/packages/2d/gui/icons/crosshairs-plus-139902
 
 Riven Soundtrack - Atrus' Theme: https://www.youtube.com/watch?v=rMOSTOSyNz8

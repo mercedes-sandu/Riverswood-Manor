@@ -2,11 +2,6 @@ using UnityEngine;
 
 public class Interactor : MonoBehaviour
 {
-    // /// <summary>
-    // /// The interaction icon.
-    // /// </summary>
-    // [SerializeField] private GameObject interactIcon;
-    
     /// <summary>
     /// The transform of the player's interaction point.
     /// </summary>
@@ -33,11 +28,11 @@ public class Interactor : MonoBehaviour
     [SerializeField] private int numFound;
 
     /// <summary>
-    /// Sets the interact icon to disabled.
+    /// Sets the cursor to be normal.
     /// </summary>
     void Start()
     {
-        // interactIcon.SetActive(false);
+        GameEvent.ChangeCursor(false);
     }
     
     /// <summary>
@@ -53,9 +48,9 @@ public class Interactor : MonoBehaviour
             var interactable = _colliders[0].GetComponent<IInteractable>();
             if (interactable != null)
             {
-                // interactIcon.SetActive(true);
+                GameEvent.ChangeCursor(true);
                 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetMouseButtonDown(0))
                 {
                     interactable.Interact(this);
                 }
@@ -63,7 +58,7 @@ public class Interactor : MonoBehaviour
         }
         else
         {
-            // interactIcon.SetActive(false);
+            GameEvent.ChangeCursor(false);
         }
     }
 

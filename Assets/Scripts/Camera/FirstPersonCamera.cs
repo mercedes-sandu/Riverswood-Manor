@@ -33,7 +33,6 @@ public class FirstPersonCamera : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        // todo: remove after using custom cursors?
         Cursor.visible = false;
     }
 
