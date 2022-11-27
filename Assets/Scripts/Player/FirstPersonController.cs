@@ -153,7 +153,7 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The player's interaction range.
     /// </summary>
-    [SerializeField] private float interactionDistance = 1.5f;
+    [SerializeField] private float interactionDistance = 2f;
 
     /// <summary>
     /// The interaction layer mask.
@@ -315,14 +315,12 @@ public class FirstPersonController : MonoBehaviour
                 if (_currentInteractable)
                 {
                     _currentInteractable.OnFocus();
-                    Debug.Log("looking at " + _currentInteractable.name);
                 }
             }
         }
         else if (_currentInteractable)
         {
             _currentInteractable.OnLoseFocus();
-            Debug.Log("stopped looking at " + _currentInteractable.name);
             _currentInteractable = null;
         }
     }

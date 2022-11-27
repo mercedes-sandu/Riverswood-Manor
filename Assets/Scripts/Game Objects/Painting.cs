@@ -3,9 +3,19 @@ using UnityEngine;
 public class Painting : Interactable
 {
     /// <summary>
+    /// The painting creaking sound clip.
+    /// </summary>
+    [SerializeField] private AudioClip creakingNoise;
+    
+    /// <summary>
     /// The animator component.
     /// </summary>
     private Animator _animator;
+
+    /// <summary>
+    /// The audio source component.
+    /// </summary>
+    private AudioSource _audioSource;
     
     /// <summary>
     /// True if the painting is rotating, false otherwise.
@@ -20,6 +30,7 @@ public class Painting : Interactable
         _isRotating = false;
         _animator = GetComponent<Animator>();
         _animator.SetBool("IsRotating", false);
+        _audioSource = GetComponent<AudioSource>();
     }
     
     /// <summary>
@@ -38,6 +49,7 @@ public class Painting : Interactable
         if (!_isRotating && !_animator.GetBool("IsRotating"))
         {
             _isRotating = true;
+            _audioSource.PlayOneShot(creakingNoise);
             _animator.SetBool("IsRotating", true);
         }
     }
