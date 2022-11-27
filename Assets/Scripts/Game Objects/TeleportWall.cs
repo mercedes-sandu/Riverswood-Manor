@@ -12,6 +12,15 @@ public class TeleportWall : Interactable
     /// True if the player has moved the painting, false otherwise.
     /// </summary>
     private bool _canClick;
+
+    /// <summary>
+    /// Subscribes to GameEvents.
+    /// </summary>
+    void Start()
+    {
+        GameEvent.OnPaintingClick += SetClickability;
+        _canClick = false;
+    }
     
     /// <summary>
     /// Changes the cursor to interacting.
@@ -35,5 +44,21 @@ public class TeleportWall : Interactable
     public override void OnLoseFocus()
     {
         GameEvent.ChangeCursor(false);
+    }
+
+    /// <summary>
+    /// Allows the wall to be clicked.
+    /// </summary>
+    private void SetClickability()
+    {
+        _canClick = true;
+    }
+
+    /// <summary>
+    /// Unsubscribes from GameEvents.
+    /// </summary>
+    void OnDestroy()
+    {
+        GameEvent.OnPaintingClick -= SetClickability;
     }
 }
