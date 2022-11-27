@@ -42,7 +42,7 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The player's walk speed.
     /// </summary>
-    [SerializeField] private float walkSpeed = 3f;
+    [SerializeField] private float walkSpeed = 4f;
 
     /// <summary>
     /// The player's crouch speed.
@@ -93,12 +93,12 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The player's crouching height.
     /// </summary>
-    [SerializeField] private float crouchHeight = 0.75f;
+    [SerializeField] private float crouchHeight = 1f;
 
     /// <summary>
     /// The player's normal standing height.
     /// </summary>
-    [SerializeField] private float standingHeight = 3f;
+    [SerializeField] private float standingHeight = 4f;
 
     /// <summary>
     /// The time it takes for the player to crouch.
@@ -108,7 +108,7 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The center of the crouching player.
     /// </summary>
-    [SerializeField] private Vector3 crouchingCenter = new Vector3(0, 0.75f, 0);
+    [SerializeField] private Vector3 crouchingCenter = new Vector3(0, 1f, 0);
 
     /// <summary>
     /// The center of the standing player.
@@ -153,7 +153,7 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The player's interaction range.
     /// </summary>
-    [SerializeField] private float interactionDistance = 3f;
+    [SerializeField] private float interactionDistance = 2f;
 
     /// <summary>
     /// The interaction layer mask.

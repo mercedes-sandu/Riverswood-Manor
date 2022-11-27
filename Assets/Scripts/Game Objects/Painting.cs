@@ -1,19 +1,7 @@
-using System.Collections;
 using UnityEngine;
 
 public class Painting : Interactable
 {
-    // /// <summary>
-    // /// 
-    // /// The rotation that the painting will go to when interacted with.
-    // /// </summary>
-    // [SerializeField] private Quaternion targetRotation = Quaternion.Euler(0, 90, 0);
-    //
-    // /// <summary>
-    // /// The time it takes to rotate the painting.
-    // /// </summary>
-    // [SerializeField] private float timeToRotate = 0.5f;
-
     /// <summary>
     /// The animator component.
     /// </summary>
@@ -47,13 +35,11 @@ public class Painting : Interactable
     /// </summary>
     public override void OnInteract()
     {
-        if (!_isRotating)
+        if (!_isRotating && !_animator.GetBool("IsRotating"))
         {
             _isRotating = true;
             _animator.SetBool("IsRotating", true);
         }
-        
-        // if (!_isRotating) StartCoroutine(RotatePainting());
     }
 
     /// <summary>
@@ -64,29 +50,12 @@ public class Painting : Interactable
         GameEvent.ChangeCursor(false);
     }
 
-    // /// <summary>
-    // /// Gradually rotates the painting.
-    // /// </summary>
-    // /// <returns></returns>
-    // private IEnumerator RotatePainting()
-    // {
-    //     float timeElapsed = 0;
-    //     Quaternion currentRotation = _parent.rotation;
-    //     _isRotating = true;
-    //
-    //     while (timeElapsed < timeToRotate)
-    //     {
-    //         _parent.rotation = Quaternion.Lerp(currentRotation, targetRotation, timeElapsed / timeToRotate);
-    //         timeElapsed += Time.deltaTime;
-    //         yield return null;
-    //     }
-    //     
-    //     _parent.rotation = targetRotation;
-    //     _isRotating = false;
-    // }
-
+    /// <summary>
+    /// Called by the animator when the painting is done rotating.
+    /// </summary>
     public void StopRotating()
     {
         _isRotating = false;
+        GameEvent.ActivatePaintingPortal();
     }
 }
