@@ -9,13 +9,21 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Image itemImage;
 
     /// <summary>
+    /// The canvas component
+    /// </summary>
+    private Canvas _canvas;
+
+    /// <summary>
     /// Subscribes to GameEvents and disables UI elements.
     /// </summary>
     void Awake()
     {
         GameEvent.OnItemDisplay += DisplayItem;
+        GameEvent.OnInventoryMenuToggle += ToggleInventoryMenu;
         
+        _canvas = GetComponent<Canvas>();
         itemImage.enabled = false;
+        _canvas.enabled = false;
         
         DontDestroyOnLoad(gameObject);
     }
@@ -28,5 +36,23 @@ public class InventoryUI : MonoBehaviour
     {
         itemImage.sprite = displaySprite;
         itemImage.enabled = true;
+    }
+
+    /// <summary>
+    /// Toggles the visibility of the inventory menu.
+    /// </summary>
+    /// <param name="opening">True if the inventory menu is opening, false otherwise.</param>
+    private void ToggleInventoryMenu(bool opening)
+    {
+        _canvas.enabled = opening;
+    }
+    
+    /// <summary>
+    /// Unsubscribes from GameEvents.
+    /// </summary>
+    void OnDestroy()
+    {
+        GameEvent.OnItemDisplay -= DisplayItem;
+        GameEvent.OnInventoryMenuToggle -= ToggleInventoryMenu;
     }
 }

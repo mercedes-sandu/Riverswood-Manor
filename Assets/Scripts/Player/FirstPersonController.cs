@@ -40,6 +40,11 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private KeyCode interactKey = KeyCode.Mouse0;
 
     /// <summary>
+    /// The player's inventory key.
+    /// </summary>
+    [SerializeField] private KeyCode inventoryKey = KeyCode.E;
+
+    /// <summary>
     /// The player's walk speed.
     /// </summary>
     [SerializeField] private float walkSpeed = 4f;
@@ -189,12 +194,19 @@ public class FirstPersonController : MonoBehaviour
     /// The player's x-rotation
     /// </summary>
     private float _rotationX = 0;
+
+    /// <summary>
+    /// True if the player's inventory is open, false otherwise.
+    /// </summary>
+    private bool _inventoryOpen = false;
     
     /// <summary>
     /// Gets components and locks the cursor to the middle of the screen.
     /// </summary>
     void Awake()
     {
+        GameEvent.OnInventoryMenuToggle += ToggleCursorLock;
+        
         _playerCamera = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
         _defaultFOV = _playerCamera.fieldOfView;
@@ -212,14 +224,18 @@ public class FirstPersonController : MonoBehaviour
     {
         if (CanMove)
         {
-            HandleMovementInput();
-            HandleMouseLook();
-            HandleJump();
-            HandleCrouch();
-            HandleZoom();
-            HandleInteractionCheck();
-            HandleInteractionInput();
-            ApplyFinalMovements();
+            HandleInventoryInput();
+            if (!_inventoryOpen)
+            {
+                HandleMovementInput();
+                HandleMouseLook();
+                HandleJump();
+                HandleCrouch();
+                HandleZoom();
+                HandleInteractionCheck();
+                HandleInteractionInput();
+                ApplyFinalMovements();
+            }
         }
     }
     
@@ -337,6 +353,18 @@ public class FirstPersonController : MonoBehaviour
             _currentInteractable.OnInteract();
         }
     }
+    
+    /// <summary>
+    /// Handles player inventory input.
+    /// </summary>
+    private void HandleInventoryInput()
+    {
+        if (Input.GetKeyDown(inventoryKey))
+        {
+            _inventoryOpen = !_inventoryOpen;
+            GameEvent.ToggleCursorLock(_inventoryOpen);
+        }
+    }
 
     /// <summary>
     /// Applies any final movements to the player.
@@ -353,6 +381,25 @@ public class FirstPersonController : MonoBehaviour
     private void ResetJump()
     {
         _readyToJump = true;
+    }
+
+    /// <summary>
+    /// Toggles the cursor's lock state.
+    /// </summary>
+    /// <param name="opening">True if the cursor is to be locked, false otherwise.</param>
+    private void ToggleCursorLock(bool opening)
+    {
+        if (opening)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     /// <summary>

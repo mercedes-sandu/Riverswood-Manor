@@ -21,6 +21,11 @@ public static class GameEvent
     /// Handles the player's inventory UI.
     /// </summary>
     public delegate void InventoryUIHandler(Sprite displaySprite);
+    
+    /// <summary>
+    /// Handles the inventory menu and cursor.
+    /// </summary>
+    public delegate void InventoryMenuHandler(bool opening);
 
     /// <summary>
     /// Detects when the mouse cursor should be changed.
@@ -41,6 +46,11 @@ public static class GameEvent
     /// Detects when an item is to be displayed in the inventory UI.
     /// </summary>
     public static event InventoryUIHandler OnItemDisplay;
+    
+    /// <summary>
+    /// Detects when the inventory opens/closes and the mouse cursor lock state should be changed.
+    /// </summary>
+    public static event InventoryMenuHandler OnInventoryMenuToggle;
 
     /// <summary>
     /// Changes the mouse cursor to the specified texture.
@@ -67,4 +77,10 @@ public static class GameEvent
     /// </summary>
     /// <param name="displaySprite">The sprite to be displayed.</param>
     public static void DisplayItem(Sprite displaySprite) => OnItemDisplay?.Invoke(displaySprite);
+    
+    /// <summary>
+    /// Toggles the cursor's lock state and inventory menu visibility.
+    /// </summary>
+    /// <param name="opening">True if the menu is being opened and the cursor should be locked, false otherwise.</param>
+    public static void ToggleCursorLock(bool opening) => OnInventoryMenuToggle?.Invoke(opening);
 }
