@@ -153,7 +153,7 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The player's interaction range.
     /// </summary>
-    [SerializeField] private float interactionDistance = 2f;
+    [SerializeField] private float interactionDistance = 1.5f;
 
     /// <summary>
     /// The interaction layer mask.
@@ -305,6 +305,7 @@ public class FirstPersonController : MonoBehaviour
         if (Physics.Raycast(_playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit,
                 interactionDistance))
         {
+            Debug.DrawRay(_playerCamera.transform.position, _playerCamera.ViewportToWorldPoint(interactionRayPoint), Color.red);
             if (hit.collider.gameObject.layer == 7 && 
                 (_currentInteractable == null || hit.collider.gameObject.GetInstanceID() != 
                     _currentInteractable.GetInstanceID()))
@@ -314,13 +315,15 @@ public class FirstPersonController : MonoBehaviour
                 if (_currentInteractable)
                 {
                     _currentInteractable.OnFocus();
+                    Debug.Log("looking at " + _currentInteractable.name);
                 }
             }
-            else if (_currentInteractable)
-            {
-                _currentInteractable.OnLoseFocus();
-                _currentInteractable = null;
-            }
+        }
+        else if (_currentInteractable)
+        {
+            _currentInteractable.OnLoseFocus();
+            Debug.Log("stopped looking at " + _currentInteractable.name);
+            _currentInteractable = null;
         }
     }
 
