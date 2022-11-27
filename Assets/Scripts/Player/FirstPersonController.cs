@@ -93,12 +93,12 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The player's crouching height.
     /// </summary>
-    [SerializeField] private float crouchHeight = 0.5f;
+    [SerializeField] private float crouchHeight = 0.75f;
 
     /// <summary>
     /// The player's normal standing height.
     /// </summary>
-    [SerializeField] private float standingHeight = 2f;
+    [SerializeField] private float standingHeight = 3f;
 
     /// <summary>
     /// The time it takes for the player to crouch.
@@ -108,7 +108,7 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The center of the crouching player.
     /// </summary>
-    [SerializeField] private Vector3 crouchingCenter = new Vector3(0, 0.5f, 0);
+    [SerializeField] private Vector3 crouchingCenter = new Vector3(0, 0.75f, 0);
 
     /// <summary>
     /// The center of the standing player.
@@ -153,12 +153,12 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The player's interaction range.
     /// </summary>
-    [SerializeField] private float interactionDistance = 2f;
+    [SerializeField] private float interactionDistance = 3f;
 
     /// <summary>
     /// The interaction layer mask.
     /// </summary>
-    [SerializeField] private LayerMask interactionLayer = 9;
+    [SerializeField] private LayerMask interactionLayer = 7;
     
     /// <summary>
     /// The player's current interactable object.
@@ -303,7 +303,7 @@ public class FirstPersonController : MonoBehaviour
         if (Physics.Raycast(_playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit,
                 interactionDistance))
         {
-            if (hit.collider.gameObject.layer == 9 && 
+            if (hit.collider.gameObject.layer == 7 && 
                 (_currentInteractable == null || hit.collider.gameObject.GetInstanceID() != 
                     _currentInteractable.GetInstanceID()))
             {
