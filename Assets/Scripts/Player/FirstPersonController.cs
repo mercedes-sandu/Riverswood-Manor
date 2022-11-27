@@ -93,7 +93,7 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The player's crouching height.
     /// </summary>
-    [SerializeField] private float crouchHeight = 1f;
+    [SerializeField] private float crouchHeight = 2f;
 
     /// <summary>
     /// The player's normal standing height.
@@ -201,6 +201,8 @@ public class FirstPersonController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _readyToJump = true;
+        
+        DontDestroyOnLoad(gameObject);
     }
     
     /// <summary>
@@ -358,9 +360,8 @@ public class FirstPersonController : MonoBehaviour
     /// <returns></returns>
     private IEnumerator CrouchStand()
     {
-        if (_isCrouching && Physics.Raycast(_playerCamera.transform.position, Vector3.up, 1f))
+        if (_isCrouching && Physics.Raycast(_playerCamera.transform.position, Vector3.up, 0.5f))
             yield break;
-
 
         _duringCrouchAnimation = true;
 

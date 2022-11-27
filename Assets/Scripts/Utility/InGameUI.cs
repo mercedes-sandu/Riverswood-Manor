@@ -26,6 +26,8 @@ public class InGameUI : MonoBehaviour
         GameEvent.OnCursorChange += ChangeCursor;
         
         cursorImage.sprite = cursor;
+        
+        DontDestroyOnLoad(gameObject);
     }
 
     /// <summary>
