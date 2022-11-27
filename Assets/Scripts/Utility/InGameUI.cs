@@ -18,6 +18,9 @@ public class InGameUI : MonoBehaviour
     /// </summary>
     [SerializeField] private Image cursorImage;
 
+    /// <summary>
+    /// Subscribes to GameEvents.
+    /// </summary>
     void Awake()
     {
         GameEvent.OnCursorChange += ChangeCursor;
