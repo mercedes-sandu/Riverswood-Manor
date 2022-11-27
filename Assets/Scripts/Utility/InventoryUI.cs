@@ -16,6 +16,8 @@ public class InventoryUI : MonoBehaviour
         GameEvent.OnItemDisplay += DisplayItem;
         
         itemImage.enabled = false;
+        
+        DontDestroyOnLoad(gameObject);
     }
     
     /// <summary>
