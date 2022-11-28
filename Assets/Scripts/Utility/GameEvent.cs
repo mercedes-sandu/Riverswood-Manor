@@ -3,6 +3,11 @@ using UnityEngine;
 public static class GameEvent
 {
     /// <summary>
+    /// Handles the player's movement ability.
+    /// </summary>
+    public delegate void PlayerHandler(bool canMove, bool inMenu);
+    
+    /// <summary>
     /// Handles the texture of the mouse cursor.
     /// </summary>
     public delegate void CursorHandler(bool interacting);
@@ -28,6 +33,11 @@ public static class GameEvent
     public delegate void InventoryMenuHandler(bool opening);
 
     /// <summary>
+    /// Detects when the player's movement ability is toggled.
+    /// </summary>
+    public static event PlayerHandler OnPlayerToggleMovement;
+    
+    /// <summary>
     /// Detects when the mouse cursor should be changed.
     /// </summary>
     public static event CursorHandler OnCursorChange;
@@ -52,6 +62,13 @@ public static class GameEvent
     /// </summary>
     public static event InventoryMenuHandler OnInventoryMenuToggle;
 
+    /// <summary>
+    /// Toggles the player's movement.
+    /// </summary>
+    /// <param name="canMove">True if the player can now move, false otherwise.</param>
+    /// <param name="inMenu">True if the player will be in a menu, false otherwise.</param>
+    public static void ToggleMovement(bool canMove, bool inMenu) => OnPlayerToggleMovement?.Invoke(canMove, inMenu);
+    
     /// <summary>
     /// Changes the mouse cursor to the specified texture.
     /// </summary>
@@ -82,5 +99,5 @@ public static class GameEvent
     /// Toggles the cursor's lock state and inventory menu visibility.
     /// </summary>
     /// <param name="opening">True if the menu is being opened and the cursor should be locked, false otherwise.</param>
-    public static void ToggleCursorLock(bool opening) => OnInventoryMenuToggle?.Invoke(opening);
+    public static void ToggleInventoryMenu(bool opening) => OnInventoryMenuToggle?.Invoke(opening);
 }

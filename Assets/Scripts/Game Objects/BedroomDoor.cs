@@ -28,6 +28,11 @@ public class BedroomDoor : Interactable
     private Animator _paperNoteAnimator;
 
     /// <summary>
+    /// True if the note has been sent, false otherwise.
+    /// </summary>
+    private bool _sentNote = false;
+
+    /// <summary>
     /// Gets components.
     /// </summary>
     void Start()
@@ -59,7 +64,7 @@ public class BedroomDoor : Interactable
     public override void OnLoseFocus()
     {
         GameEvent.ChangeCursor(false);
-        Invoke(nameof(SlideNoteIn), 3f);
+        if (!_sentNote) Invoke(nameof(SlideNoteIn), 3f);
     }
     
     /// <summary>
@@ -69,5 +74,6 @@ public class BedroomDoor : Interactable
     {
         _audioSource.PlayOneShot(paperNoise);
         _paperNoteAnimator.SetBool("IsSliding", true);
+        _sentNote = true;
     }
 }

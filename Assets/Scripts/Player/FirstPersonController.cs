@@ -199,13 +199,18 @@ public class FirstPersonController : MonoBehaviour
     /// True if the player's inventory is open, false otherwise.
     /// </summary>
     private bool _inventoryOpen = false;
+
+    /// <summary>
+    /// True if the player's collected item is being displayed, false otherwise.
+    /// </summary>
+    private bool _itemBeingDisplayed = false;
     
     /// <summary>
     /// Gets components and locks the cursor to the middle of the screen.
     /// </summary>
     void Awake()
     {
-        GameEvent.OnInventoryMenuToggle += ToggleCursorLock;
+        GameEvent.OnPlayerToggleMovement += ToggleMovement;
         
         _playerCamera = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
@@ -225,7 +230,7 @@ public class FirstPersonController : MonoBehaviour
         if (CanMove)
         {
             HandleInventoryInput();
-            if (!_inventoryOpen)
+            if (!_inventoryOpen && !_itemBeingDisplayed)
             {
                 HandleMovementInput();
                 HandleMouseLook();
@@ -362,7 +367,8 @@ public class FirstPersonController : MonoBehaviour
         if (Input.GetKeyDown(inventoryKey))
         {
             _inventoryOpen = !_inventoryOpen;
-            GameEvent.ToggleCursorLock(_inventoryOpen);
+            GameEvent.ToggleInventoryMenu(_inventoryOpen);
+            GameEvent.ToggleMovement(!_inventoryOpen, _itemBeingDisplayed);
         }
     }
 
@@ -384,21 +390,26 @@ public class FirstPersonController : MonoBehaviour
     }
 
     /// <summary>
-    /// Toggles the cursor's lock state.
+    /// 
     /// </summary>
-    /// <param name="opening">True if the cursor is to be locked, false otherwise.</param>
-    private void ToggleCursorLock(bool opening)
+    /// <param name="canMove"></param>
+    /// <param name="inMenu"></param>
+    private void ToggleMovement(bool canMove, bool inMenu)
     {
-        if (opening)
+        if (canMove)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            
+            Debug.Log("player can move, cursor is locked.");
+            _inventoryOpen = false;
+            _itemBeingDisplayed = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            Debug.Log(inMenu ? "player can't move, cursor is visible." : "player can't move, cursor is locked.");
+            _itemBeingDisplayed = !inMenu;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
@@ -455,5 +466,13 @@ public class FirstPersonController : MonoBehaviour
         
         _playerCamera.fieldOfView = targetFOV;
         _zoomRoutine = null;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    void OnDestroy()
+    {
+        GameEvent.OnPlayerToggleMovement -= ToggleMovement;
     }
 }

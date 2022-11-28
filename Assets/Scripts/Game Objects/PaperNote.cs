@@ -27,6 +27,7 @@ public class PaperNote : Interactable
     {
         GameEvent.CollectItem(gameObject, paperNoteIcon, paperNoteDisplay);
         GameEvent.DisplayItem(paperNoteDisplay);
+        gameObject.SetActive(false);
     }
     
     /// <summary>

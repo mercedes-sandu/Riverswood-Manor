@@ -24,7 +24,9 @@ public class InGameUI : MonoBehaviour
     void Awake()
     {
         GameEvent.OnCursorChange += ChangeCursor;
-        GameEvent.OnInventoryMenuToggle += ToggleCursorVisibility;
+        GameEvent.OnPlayerToggleMovement += ToggleCursor;
+        // GameEvent.OnItemDisplay += OnItemDisplay;
+        // GameEvent.OnInventoryMenuToggle += ToggleCursorVisibility;
         
         cursorImage.sprite = cursor;
         cursorImage.enabled = true;
@@ -43,12 +45,14 @@ public class InGameUI : MonoBehaviour
     }
 
     /// <summary>
-    /// Sets the cursor to be visible if it is to be locked and invisible otherwise.
+    /// 
     /// </summary>
-    /// <param name="toBeLocked">True if the cursor is to be locked, false otherwise.</param>
-    private void ToggleCursorVisibility(bool toBeLocked)
+    /// <param name="canMove"></param>
+    /// <param name="inMenu"></param>
+    private void ToggleCursor(bool canMove, bool inMenu)
     {
-        cursorImage.enabled = !toBeLocked;
+        cursorImage.enabled = canMove;
+        Debug.Log("cursor set to " + cursorImage.enabled);
     }
 
     /// <summary>
@@ -57,6 +61,6 @@ public class InGameUI : MonoBehaviour
     void OnDestroy()
     {
         GameEvent.OnCursorChange -= ChangeCursor;
-        GameEvent.OnInventoryMenuToggle -= ToggleCursorVisibility;
+        // GameEvent.OnInventoryMenuToggle -= ToggleCursorVisibility;
     }
 }
