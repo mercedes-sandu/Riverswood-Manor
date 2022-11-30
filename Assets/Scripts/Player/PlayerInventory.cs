@@ -9,7 +9,7 @@ public class PlayerInventory : MonoBehaviour
     private readonly List<GameObject> _inventoryItems = new List<GameObject>();
 
     /// <summary>
-    /// 
+    /// Subscribes to GameEvents.
     /// </summary>
     void Awake()
     {
@@ -17,16 +17,24 @@ public class PlayerInventory : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Adds an item to the player's inventory.
     /// </summary>
-    /// <param name="item"></param>
-    /// <param name="icon"></param>
-    /// <param name="displaySprite"></param>
+    /// <param name="item">The item.</param>
+    /// <param name="icon">The item's icon.</param>
+    /// <param name="displaySprite">The item's display sprite.</param>
     private void AddItem(GameObject item, Sprite icon, Sprite displaySprite)
     {
         if (!_inventoryItems.Contains(item))
         {
             _inventoryItems.Add(item);
         }
+    }
+
+    /// <summary>
+    /// Unsubscribes from GameEvents.
+    /// </summary>
+    void OnDestroy()
+    {
+        GameEvent.OnItemCollect -= AddItem;
     }
 }

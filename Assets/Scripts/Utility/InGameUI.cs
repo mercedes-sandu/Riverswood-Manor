@@ -19,19 +19,24 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private Image cursorImage;
 
     /// <summary>
+    /// The canvas component.
+    /// </summary>
+    private Canvas _canvas;
+
+    /// <summary>
     /// Subscribes to GameEvents.
     /// </summary>
     void Awake()
     {
         GameEvent.OnCursorChange += ChangeCursor;
         GameEvent.OnPlayerToggleMovement += ToggleCursor;
-        // GameEvent.OnItemDisplay += OnItemDisplay;
-        // GameEvent.OnInventoryMenuToggle += ToggleCursorVisibility;
-        
+        GameEvent.OnGameStart += ShowCanvas;
+
         cursorImage.sprite = cursor;
         cursorImage.enabled = true;
-
-        DontDestroyOnLoad(gameObject);
+        
+        _canvas = GetComponent<Canvas>();
+        _canvas.enabled = false;
     }
 
     /// <summary>
@@ -45,14 +50,21 @@ public class InGameUI : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Toggles the visibility of the cursor.
     /// </summary>
-    /// <param name="canMove"></param>
-    /// <param name="inMenu"></param>
+    /// <param name="canMove">True if the player will be able to move, false otherwise.</param>
+    /// <param name="inMenu">True if the player will be in a menu, false otherwise.</param>
     private void ToggleCursor(bool canMove, bool inMenu)
     {
         cursorImage.enabled = canMove;
-        Debug.Log("cursor set to " + cursorImage.enabled);
+    }
+    
+    /// <summary>
+    /// Shows the canvas when the game starts.
+    /// </summary>
+    private void ShowCanvas()
+    {
+        _canvas.enabled = true;
     }
 
     /// <summary>
@@ -61,6 +73,7 @@ public class InGameUI : MonoBehaviour
     void OnDestroy()
     {
         GameEvent.OnCursorChange -= ChangeCursor;
-        // GameEvent.OnInventoryMenuToggle -= ToggleCursorVisibility;
+        GameEvent.OnPlayerToggleMovement -= ToggleCursor;
+        GameEvent.OnGameStart -= ShowCanvas;
     }
 }

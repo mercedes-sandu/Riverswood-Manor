@@ -13,19 +13,42 @@ public class BedroomScene : MonoBehaviour
     private AudioSource _audioSource;
 
     /// <summary>
-    /// Gets components and invokes methods.
+    /// Subscribes to GameEvents.
+    /// </summary>
+    void Awake()
+    {
+        GameEvent.OnGameStart += OnGameStart;
+    }
+    
+    /// <summary>
+    /// Gets components.
     /// </summary>
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        Invoke(nameof(PlayScream), 1.0f);
     }
 
+    /// <summary>
+    /// Invokes the scream one second after starting the game.
+    /// </summary>
+    private void OnGameStart()
+    {
+        Invoke(nameof(PlayScream), 1.0f);
+    }
+    
     /// <summary>
     /// Plays the scream audio clip.
     /// </summary>
     private void PlayScream()
     {
         _audioSource.PlayOneShot(countessScream);
+    }
+
+    /// <summary>
+    /// Unsubscribes from GameEvents.
+    /// </summary>
+    void OnDestroy()
+    {
+        GameEvent.OnGameStart -= OnGameStart;
     }
 }

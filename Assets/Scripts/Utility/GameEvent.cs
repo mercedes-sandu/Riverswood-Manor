@@ -3,6 +3,11 @@ using UnityEngine;
 public static class GameEvent
 {
     /// <summary>
+    /// Handles when the game starts.
+    /// </summary>
+    public delegate void GameStartHandler();
+    
+    /// <summary>
     /// Handles the player's movement ability.
     /// </summary>
     public delegate void PlayerHandler(bool canMove, bool inMenu);
@@ -33,6 +38,11 @@ public static class GameEvent
     public delegate void InventoryMenuHandler(bool opening);
 
     /// <summary>
+    /// Detects when the game starts.
+    /// </summary>
+    public static event GameStartHandler OnGameStart;
+    
+    /// <summary>
     /// Detects when the player's movement ability is toggled.
     /// </summary>
     public static event PlayerHandler OnPlayerToggleMovement;
@@ -62,6 +72,11 @@ public static class GameEvent
     /// </summary>
     public static event InventoryMenuHandler OnInventoryMenuToggle;
 
+    /// <summary>
+    /// Starts the game.
+    /// </summary>
+    public static void StartGame() => OnGameStart?.Invoke();
+    
     /// <summary>
     /// Toggles the player's movement.
     /// </summary>

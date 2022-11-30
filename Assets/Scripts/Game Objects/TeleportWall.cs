@@ -1,12 +1,11 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TeleportWall : Interactable
 {
     /// <summary>
-    /// The scene the player will teleport to by clicking the wall.
+    /// The teleport location.
     /// </summary>
-    [SerializeField] private string nextSceneName;
+    [SerializeField] private Transform teleportPoint;
 
     /// <summary>
     /// True if the player has moved the painting, false otherwise.
@@ -31,11 +30,11 @@ public class TeleportWall : Interactable
     }
 
     /// <summary>
-    /// Changes the scene to the next scene.
+    /// Teleports the player to the next location.
     /// </summary>
     public override void OnInteract()
     {
-        if (_canClick) SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
+        if (_canClick) FirstPersonController.Instance.transform.position = teleportPoint.position;
     }
 
     /// <summary>

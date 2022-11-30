@@ -4,9 +4,14 @@ using UnityEngine;
 public class FirstPersonController : MonoBehaviour
 {
     /// <summary>
+    /// An instance of the player available to all other scripts.
+    /// </summary>
+    public static FirstPersonController Instance = null;
+    
+    /// <summary>
     /// True if the player can move, false otherwise.
     /// </summary>
-    public bool CanMove { get; private set; } = true;
+    public bool CanMove { get; set; } = true;
 
     /// <summary>
     /// True if the player should jump, false otherwise.
@@ -210,18 +215,23 @@ public class FirstPersonController : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        if (!Instance)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        
         GameEvent.OnPlayerToggleMovement += ToggleMovement;
         
         _playerCamera = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
         _defaultFOV = _playerCamera.fieldOfView;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         _readyToJump = true;
-        
-        DontDestroyOnLoad(gameObject);
     }
-    
+
     /// <summary>
     /// Controls the player accordingly.
     /// </summary>
@@ -326,7 +336,6 @@ public class FirstPersonController : MonoBehaviour
         if (Physics.Raycast(_playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit,
                 interactionDistance))
         {
-            Debug.DrawRay(_playerCamera.transform.position, _playerCamera.ViewportToWorldPoint(interactionRayPoint), Color.red);
             if (hit.collider.gameObject.layer == 7 && 
                 (_currentInteractable == null || hit.collider.gameObject.GetInstanceID() != 
                     _currentInteractable.GetInstanceID()))
@@ -390,15 +399,14 @@ public class FirstPersonController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Toggles the player's movement status.
     /// </summary>
-    /// <param name="canMove"></param>
-    /// <param name="inMenu"></param>
+    /// <param name="canMove">True if the player will be able to move, false otherwise.</param>
+    /// <param name="inMenu">True if the player will be in a menu, false otherwise.</param>
     private void ToggleMovement(bool canMove, bool inMenu)
     {
         if (canMove)
         {
-            Debug.Log("player can move, cursor is locked.");
             _inventoryOpen = false;
             _itemBeingDisplayed = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -406,7 +414,6 @@ public class FirstPersonController : MonoBehaviour
         }
         else
         {
-            Debug.Log(inMenu ? "player can't move, cursor is visible." : "player can't move, cursor is locked.");
             _itemBeingDisplayed = !inMenu;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -469,7 +476,7 @@ public class FirstPersonController : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Unsubscribes from GameEvents.
     /// </summary>
     void OnDestroy()
     {

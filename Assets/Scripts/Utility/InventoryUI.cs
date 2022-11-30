@@ -56,12 +56,10 @@ public class InventoryUI : MonoBehaviour
         itemImage.enabled = false;
         itemImageCloseButton.SetActive(false);
         _canvas.enabled = false;
-        
-        DontDestroyOnLoad(gameObject);
     }
 
     /// <summary>
-    /// 
+    /// Checks to close the item display.
     /// </summary>
     void Update()
     {
@@ -80,7 +78,6 @@ public class InventoryUI : MonoBehaviour
     private void AddItem(GameObject item, Sprite icon, Sprite displaySprite)
     {
         GameObject itemButton = Instantiate(itemButtonPrefab, inventoryPanel.transform);
-        // itemButton.transform.SetParent(inventoryPanel.transform);
         itemButton.GetComponent<ItemButton>().SetItem(item, icon, displaySprite);
     }
     
@@ -125,29 +122,20 @@ public class InventoryUI : MonoBehaviour
     }
     
     /// <summary>
-    /// 
+    /// Closes the item display.
     /// </summary>
     public void CloseItemDisplay()
     {
         itemImage.enabled = false;
         itemImageCloseButton.SetActive(false);
 
-        if (inventoryPanel.activeSelf)
-        {
-            Debug.Log("closed item display in inventory");
-            GameEvent.ToggleMovement(false, true);
-        }
-        else
-        {
-            Debug.Log("closed solo item display");
-            GameEvent.ToggleMovement(true, false);
-        }
+        GameEvent.ToggleMovement(!inventoryPanel.activeSelf, inventoryPanel.activeSelf);
     }
 
     /// <summary>
-    /// 
+    /// Shows the item display exclusively (no inventory menu).
     /// </summary>
-    /// <param name="displaySprite"></param>
+    /// <param name="displaySprite">The displayed sprite.</param>
     private void ShowOnlyItemDisplay(Sprite displaySprite)
     {
         GameEvent.ToggleMovement(false, false);
