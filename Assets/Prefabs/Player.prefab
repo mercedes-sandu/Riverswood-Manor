@@ -46,7 +46,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 4
+  m_Height: 5
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -69,6 +69,7 @@ MonoBehaviour:
   crouchKey: 306
   zoomKey: 324
   interactKey: 323
+  inventoryKey: 101
   walkSpeed: 4
   crouchSpeed: 1.5
   lookSpeedX: 2
@@ -78,10 +79,10 @@ MonoBehaviour:
   jumpForce: 8
   gravity: 30
   jumpCooldown: 0.1
-  crouchHeight: 2
-  standingHeight: 4
+  crouchHeight: 3
+  standingHeight: 5
   timeToCrouch: 0.25
-  crouchingCenter: {x: 0, y: 1, z: 0}
+  crouchingCenter: {x: 0, y: 2, z: 0}
   standingCenter: {x: 0, y: 0, z: 0}
   timeToZoom: 0.3
   zoomFOV: 30

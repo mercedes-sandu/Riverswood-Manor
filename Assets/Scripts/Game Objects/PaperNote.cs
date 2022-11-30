@@ -13,6 +13,19 @@ public class PaperNote : Interactable
     [SerializeField] private Sprite paperNoteDisplay;
     
     /// <summary>
+    /// The audio source component.
+    /// </summary>
+    private AudioSource _audioSource;
+
+    /// <summary>
+    /// Gets components.
+    /// </summary>
+    void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+    
+    /// <summary>
     /// Changes the cursor to interacting.
     /// </summary>
     public override void OnFocus()
@@ -25,6 +38,7 @@ public class PaperNote : Interactable
     /// </summary>
     public override void OnInteract()
     {
+        _audioSource.Play();
         GameEvent.CollectItem(gameObject, paperNoteIcon, paperNoteDisplay);
         GameEvent.DisplayItem(paperNoteDisplay);
         gameObject.SetActive(false);
