@@ -31,6 +31,7 @@ public class InGameUI : MonoBehaviour
         GameEvent.OnCursorChange += ChangeCursor;
         GameEvent.OnPlayerToggleMovement += ToggleCursor;
         GameEvent.OnGameStart += ShowCanvas;
+        GameEvent.OnGameEnd += HideCanvas;
 
         cursorImage.sprite = cursor;
         cursorImage.enabled = true;
@@ -66,6 +67,14 @@ public class InGameUI : MonoBehaviour
     {
         _canvas.enabled = true;
     }
+    
+    /// <summary>
+    /// Hides the canvas when the game ends.
+    /// </summary>
+    private void HideCanvas()
+    {
+        _canvas.enabled = false;
+    }
 
     /// <summary>
     /// Unsubscribes from GameEvents.
@@ -75,5 +84,6 @@ public class InGameUI : MonoBehaviour
         GameEvent.OnCursorChange -= ChangeCursor;
         GameEvent.OnPlayerToggleMovement -= ToggleCursor;
         GameEvent.OnGameStart -= ShowCanvas;
+        GameEvent.OnGameEnd -= HideCanvas;
     }
 }

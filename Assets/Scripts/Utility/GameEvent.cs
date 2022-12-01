@@ -48,6 +48,11 @@ public static class GameEvent
     public delegate void SecretDoorHandler();
 
     /// <summary>
+    /// Handles when the game ends.
+    /// </summary>
+    public delegate void GameEndHandler();
+
+    /// <summary>
     /// Detects when the game starts.
     /// </summary>
     public static event GameStartHandler OnGameStart;
@@ -91,6 +96,11 @@ public static class GameEvent
     /// Detects when the secret door has been unlocked.
     /// </summary>
     public static event SecretDoorHandler OnSecretDoorUnlocked;
+    
+    /// <summary>
+    /// Detects when the game has ended.
+    /// </summary>
+    public static event GameEndHandler OnGameEnd;
 
     /// <summary>
     /// Starts the game.
@@ -147,4 +157,9 @@ public static class GameEvent
     /// Unlocks the secret bookcase door.
     /// </summary>
     public static void UnlockSecretDoor() => OnSecretDoorUnlocked?.Invoke();
+    
+    /// <summary>
+    /// Ends the game.
+    /// </summary>
+    public static void EndGame() => OnGameEnd?.Invoke();
 }

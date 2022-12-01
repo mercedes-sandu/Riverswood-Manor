@@ -913,7 +913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fc69fe1d75b014fa5069f98973f728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creakingNoise: {fileID: 8300000, guid: 60c59f3b3ee0a43479aadfd1dfab6777, type: 3}
 --- !u!95 &228778491
 Animator:
   serializedVersion: 4
@@ -944,7 +943,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 60c59f3b3ee0a43479aadfd1dfab6777, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
@@ -3137,7 +3136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74475d27030f2384385798c703cb7cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countessScream: {fileID: 8300000, guid: 31c54516e3339dd4c85b9e08173403d3, type: 3}
 --- !u!82 &1269913718
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3148,7 +3146,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 31c54516e3339dd4c85b9e08173403d3, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1

@@ -3,11 +3,6 @@ using UnityEngine;
 public class BedroomScene : MonoBehaviour
 {
     /// <summary>
-    /// The scream audio clip.
-    /// </summary>
-    [SerializeField] private AudioClip countessScream;
-
-    /// <summary>
     /// The audio source component.
     /// </summary>
     private AudioSource _audioSource;
@@ -41,7 +36,7 @@ public class BedroomScene : MonoBehaviour
     /// </summary>
     private void PlayScream()
     {
-        _audioSource.PlayOneShot(countessScream);
+        _audioSource.Play();
     }
 
     /// <summary>
