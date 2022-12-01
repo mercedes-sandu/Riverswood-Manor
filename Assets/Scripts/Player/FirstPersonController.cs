@@ -232,6 +232,7 @@ public class FirstPersonController : MonoBehaviour
         _readyToJump = true;
     }
 
+    // todo: implement player footsteps
     /// <summary>
     /// Controls the player accordingly.
     /// </summary>
