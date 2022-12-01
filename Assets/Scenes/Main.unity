@@ -5864,9 +5864,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Title
-
-'
+  m_text: Riverswood Manor
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6d6eb1fb669dc83499277eeffcd2e088, type: 2}
   m_sharedMaterial: {fileID: 5594542794354745827, guid: 6d6eb1fb669dc83499277eeffcd2e088, type: 2}
