@@ -38,6 +38,16 @@ public static class GameEvent
     public delegate void InventoryMenuHandler(bool opening);
 
     /// <summary>
+    /// Handles the colored buttons by the fireplace.
+    /// </summary>
+    public delegate void ColoredButtonHandler(ColoredObject.ColoredObjectColor objectColor);
+
+    /// <summary>
+    /// Handles the secret door.
+    /// </summary>
+    public delegate void SecretDoorHandler();
+
+    /// <summary>
     /// Detects when the game starts.
     /// </summary>
     public static event GameStartHandler OnGameStart;
@@ -71,6 +81,16 @@ public static class GameEvent
     /// Detects when the inventory opens/closes and the mouse cursor lock state should be changed.
     /// </summary>
     public static event InventoryMenuHandler OnInventoryMenuToggle;
+    
+    /// <summary>
+    /// Detects when a colored button has been pressed.
+    /// </summary>
+    public static event ColoredButtonHandler OnColoredButtonPressed;
+    
+    /// <summary>
+    /// Detects when the secret door has been unlocked.
+    /// </summary>
+    public static event SecretDoorHandler OnSecretDoorUnlocked;
 
     /// <summary>
     /// Starts the game.
@@ -115,4 +135,16 @@ public static class GameEvent
     /// </summary>
     /// <param name="opening">True if the menu is being opened and the cursor should be locked, false otherwise.</param>
     public static void ToggleInventoryMenu(bool opening) => OnInventoryMenuToggle?.Invoke(opening);
+    
+    /// <summary>
+    /// Records the player's colored button input and checks if the right combination has been pressed.
+    /// </summary>
+    /// <param name="objectColor">The color of the button just pressed.</param>
+    public static void PressColoredButton(ColoredObject.ColoredObjectColor objectColor) =>
+        OnColoredButtonPressed?.Invoke(objectColor);
+    
+    /// <summary>
+    /// Unlocks the secret bookcase door.
+    /// </summary>
+    public static void UnlockSecretDoor() => OnSecretDoorUnlocked?.Invoke();
 }
