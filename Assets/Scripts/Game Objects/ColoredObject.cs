@@ -9,7 +9,7 @@ public class ColoredObject : Interactable
     /// </summary>
     public enum ColoredObjectColor
     {
-        Red, Green, Blue
+        Red, Yellow, Green
     }
 
     /// <summary>
