@@ -15,6 +15,7 @@ Wooden Door: https://sketchfab.com/3d-models/wooden-door-8726b6c219a54ed585e096f
 Floor Lamp 3D: https://www.turbosquid.com/3d-models/floor-lamp-3d-1980212
 Dark Theme UI: https://assetstore.unity.com/packages/2d/gui/dark-theme-ui-199010
 Medieval Tavern Pack: https://assetstore.unity.com/packages/3d/props/furniture/medieval-tavern-pack-112546
+3D Push Button: https://www.cgtrader.com/free-3d-models/electronics/other/push-button-a06bb1ca-eeea-405a-a5f8-03f505995cd2
 
 Old Handwritten Note: https://thumbs.dreamstime.com/b/handwriting-old-torn-vintage-paper-29943319.jpg
 Beautiful Ending: https://folio.procreate.art/_ashleysarts_/artwork/422784
@@ -23,6 +24,7 @@ Screaming Woman Sound Effect: https://www.youtube.com/watch?v=nbWD8s5Y5-I
 Paper Sound Effect: https://www.youtube.com/watch?v=eibsYJlaNsg
 Door Rattle Sound Effect: https://www.youtube.com/watch?v=I7w4J3v6POk
 Wood Creaking Sound Effect: https://www.youtube.com/watch?v=RK1W9h1MIcA
+Minecraft Button Click Sound Effect: https://www.youtube.com/watch?v=h8y0JMVwdmM
 
 Amplify Color Shader: https://assetstore.unity.com/packages/vfx/shaders/fullscreen-camera-effects/amplify-color-1894
 
