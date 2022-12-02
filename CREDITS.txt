@@ -25,6 +25,7 @@ Paper Sound Effect: https://www.youtube.com/watch?v=eibsYJlaNsg
 Door Rattle Sound Effect: https://www.youtube.com/watch?v=I7w4J3v6POk
 Wood Creaking Sound Effect: https://www.youtube.com/watch?v=RK1W9h1MIcA
 Minecraft Button Click Sound Effect: https://www.youtube.com/watch?v=h8y0JMVwdmM
+Fire Sound Effect: https://www.youtube.com/watch?v=LQ4Xg7NsbyM
 
 Amplify Color Shader: https://assetstore.unity.com/packages/vfx/shaders/fullscreen-camera-effects/amplify-color-1894
 
