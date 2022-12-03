@@ -15,12 +15,17 @@ public class RugSection : MonoBehaviour
     private AudioSource _audioSource;
 
     /// <summary>
+    /// The SteppingOn animator parameter.
+    /// </summary>
+    private static readonly int SteppingOn = Animator.StringToHash("SteppingOn");
+
+    /// <summary>
     /// Sets the animator and gets the audio source.
     /// </summary>
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-        noteAnimator.SetBool("SteppingOn", false);
+        noteAnimator.SetBool(SteppingOn, false);
     }
 
     /// <summary>
@@ -32,7 +37,7 @@ public class RugSection : MonoBehaviour
         if (!collision.collider.CompareTag("Player")) return;
         
         _audioSource.Play();
-        noteAnimator.SetBool("SteppingOn", true);
+        noteAnimator.SetBool(SteppingOn, true);
     }
 
     /// <summary>
@@ -44,6 +49,6 @@ public class RugSection : MonoBehaviour
         if (!other.collider.CompareTag("Player")) return;
         
         _audioSource.Play();
-        noteAnimator.SetBool("SteppingOn", false);
+        noteAnimator.SetBool(SteppingOn, false);
     }
 }

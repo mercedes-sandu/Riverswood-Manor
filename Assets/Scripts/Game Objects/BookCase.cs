@@ -13,7 +13,12 @@ public class BookCase : MonoBehaviour
     /// The audio source component.
     /// </summary>
     private AudioSource _audioSource;
-    
+
+    /// <summary>
+    /// The Unlocked animator parameter.
+    /// </summary>
+    private static readonly int Unlocked = Animator.StringToHash("Unlocked");
+
     /// <summary>
     /// Subscribes to GameEvents and sets components.
     /// </summary>
@@ -23,7 +28,7 @@ public class BookCase : MonoBehaviour
         
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
-        _animator.SetBool("Unlocked", false);
+        _animator.SetBool(Unlocked, false);
     }
 
     /// <summary>
@@ -32,7 +37,7 @@ public class BookCase : MonoBehaviour
     private void MoveBookcase()
     {
         _audioSource.Play();
-        _animator.SetBool("Unlocked", true);
+        _animator.SetBool(Unlocked, true);
     }
 
     /// <summary>

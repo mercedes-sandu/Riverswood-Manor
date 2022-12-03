@@ -18,13 +18,18 @@ public class Painting : Interactable
     private bool _isRotating;
 
     /// <summary>
+    /// The IsRotating animator parameter.
+    /// </summary>
+    private static readonly int IsRotating = Animator.StringToHash("IsRotating");
+
+    /// <summary>
     /// Sets the parent.
     /// </summary>
     void Start()
     {
         _isRotating = false;
         _animator = GetComponent<Animator>();
-        _animator.SetBool("IsRotating", false);
+        _animator.SetBool(IsRotating, false);
         _audioSource = GetComponent<AudioSource>();
     }
     
@@ -41,12 +46,11 @@ public class Painting : Interactable
     /// </summary>
     public override void OnInteract()
     {
-        if (!_isRotating && !_animator.GetBool("IsRotating"))
-        {
-            _isRotating = true;
-            _audioSource.Play();
-            _animator.SetBool("IsRotating", true);
-        }
+        if (_isRotating || _animator.GetBool(IsRotating)) return;
+        
+        _isRotating = true;
+        _audioSource.Play();
+        _animator.SetBool(IsRotating, true);
     }
 
     /// <summary>

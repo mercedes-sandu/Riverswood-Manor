@@ -28,13 +28,18 @@ public class ColoredObject : Interactable
     private Animator _animator;
 
     /// <summary>
+    /// The Interacted animator parameter.
+    /// </summary>
+    private static readonly int Interacted = Animator.StringToHash("Interacted");
+
+    /// <summary>
     /// Gets the components.
     /// </summary>
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
-        _animator.SetBool("Interacted", false);
+        _animator.SetBool(Interacted, false);
     }
     
     /// <summary>
@@ -51,7 +56,7 @@ public class ColoredObject : Interactable
     public override void OnInteract()
     {
         _audioSource.Play();
-        _animator.SetBool("Interacted", true);
+        _animator.SetBool(Interacted, true);
     }
     
     /// <summary>
@@ -67,7 +72,7 @@ public class ColoredObject : Interactable
     /// </summary>
     public void ResetAnimation()
     {
-        _animator.SetBool("Interacted", false);
+        _animator.SetBool(Interacted, false);
     }
 
     /// <summary>

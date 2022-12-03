@@ -41,6 +41,11 @@ public class Fireplace : Interactable
     private AudioSource _audioSource;
 
     /// <summary>
+    /// The IsVisible animator parameter.
+    /// </summary>
+    private static readonly int IsVisible = Animator.StringToHash("IsVisible");
+
+    /// <summary>
     /// Gets the components and subscribes to GameEvents.
     /// </summary>
     void Start()
@@ -48,7 +53,7 @@ public class Fireplace : Interactable
         GameEvent.OnColoredButtonPressed += OnColoredButtonPressed;
         
         _audioSource = GetComponent<AudioSource>();
-        itemDisplayImageAnimator.SetBool("IsVisible", false);
+        itemDisplayImageAnimator.SetBool(IsVisible, false);
     }
     
     /// <summary>
@@ -68,7 +73,7 @@ public class Fireplace : Interactable
         
         GameEvent.ToggleMovement(false, false); // todo: test
         GameEvent.DisplayItem(noteDisplayImageInvisible);
-        itemDisplayImageAnimator.SetBool("IsVisible", true);
+        itemDisplayImageAnimator.SetBool(IsVisible, true);
         fireplaceNote.ChangePaperNoteDisplay(noteDisplayImageVisible);
     }
     

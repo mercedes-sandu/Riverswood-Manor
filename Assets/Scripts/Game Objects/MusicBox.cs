@@ -19,7 +19,12 @@ public class MusicBox : Interactable
     /// The animator component.
     /// </summary>
     private Animator _animator;
-    
+
+    /// <summary>
+    /// The Playing animator parameter.
+    /// </summary>
+    private static readonly int Playing = Animator.StringToHash("Playing");
+
     /// <summary>
     /// Gets components.
     /// </summary>
@@ -27,7 +32,7 @@ public class MusicBox : Interactable
     {
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
-        _animator.SetBool("Playing", false);
+        _animator.SetBool(Playing, false);
     }
     
     /// <summary>
@@ -43,9 +48,9 @@ public class MusicBox : Interactable
     /// </summary>
     public override void OnInteract()
     {
-        _animator.SetBool("Playing", true);
+        _animator.SetBool(Playing, true);
         StartCoroutine(PlayAudioClipsSequentially());
-        _animator.SetBool("Playing", false);
+        _animator.SetBool(Playing, false);
     }
     
     /// <summary>

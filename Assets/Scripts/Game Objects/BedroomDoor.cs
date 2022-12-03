@@ -34,13 +34,18 @@ public class BedroomDoor : Interactable
     private bool _sentNote = false;
 
     /// <summary>
+    /// The IsSliding animator parameter.
+    /// </summary>
+    private static readonly int IsSliding = Animator.StringToHash("IsSliding");
+
+    /// <summary>
     /// Gets components.
     /// </summary>
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         _paperNoteAnimator = paperNote.GetComponent<Animator>();
-        _paperNoteAnimator.SetBool("IsSliding", false);
+        _paperNoteAnimator.SetBool(IsSliding, false);
     }
     
     /// <summary>
@@ -74,7 +79,7 @@ public class BedroomDoor : Interactable
     private void SlideNoteIn()
     {
         _audioSource.PlayOneShot(paperNoise);
-        _paperNoteAnimator.SetBool("IsSliding", true);
+        _paperNoteAnimator.SetBool(IsSliding, true);
         _sentNote = true;
     }
 }
