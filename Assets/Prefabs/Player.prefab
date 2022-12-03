@@ -79,10 +79,10 @@ MonoBehaviour:
   jumpForce: 8
   gravity: 30
   jumpCooldown: 0.1
-  crouchHeight: 3
+  crouchHeight: 1
   standingHeight: 5
   timeToCrouch: 0.25
-  crouchingCenter: {x: 0, y: 2, z: 0}
+  crouchingCenter: {x: 0, y: 0, z: 0}
   standingCenter: {x: 0, y: 0, z: 0}
   timeToZoom: 0.3
   zoomFOV: 30

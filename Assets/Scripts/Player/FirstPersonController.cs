@@ -103,7 +103,7 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The player's crouching height.
     /// </summary>
-    [SerializeField] private float crouchHeight = 3f;
+    [SerializeField] private float crouchHeight = 1f;
 
     /// <summary>
     /// The player's normal standing height.
@@ -118,7 +118,7 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The center of the crouching player.
     /// </summary>
-    [SerializeField] private Vector3 crouchingCenter = new Vector3(0, 2f, 0);
+    [SerializeField] private Vector3 crouchingCenter = new Vector3(0, 0f, 0);
 
     /// <summary>
     /// The center of the standing player.
@@ -427,9 +427,11 @@ public class FirstPersonController : MonoBehaviour
     /// <returns></returns>
     private IEnumerator CrouchStand()
     {
-        if (_isCrouching && Physics.Raycast(_playerCamera.transform.position, Vector3.up, 0.5f))
-            yield break;
+        // if (_isCrouching && Physics.Raycast(_playerCamera.transform.position, Vector3.up, 0.5f))
+        //     yield break;
 
+        Debug.Log("test");
+        
         _duringCrouchAnimation = true;
 
         float timeElapsed = 0;
@@ -442,6 +444,8 @@ public class FirstPersonController : MonoBehaviour
         {
             _characterController.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
             _characterController.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
+            Debug.Log(_characterController.height);
+            Debug.Log(_characterController.center);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
