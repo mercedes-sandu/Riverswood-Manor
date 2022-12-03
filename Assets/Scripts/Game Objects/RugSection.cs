@@ -46,9 +46,7 @@ public class RugSection : MonoBehaviour
     /// <param name="other">The collider with this part of the rug.</param>
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("test");
         if (!other.CompareTag("Player")) return;
-        Debug.Log("player stepped on rug");
         _audioSource.Play();
         noteAnimator.SetBool(SteppingOn, true);
     }

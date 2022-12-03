@@ -7080,7 +7080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e154b2479b8d143a3bea3411b302e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireplaceNote: {fileID: 0}
+  fireplaceNote: {fileID: 1582966862}
   itemDisplayImageAnimator: {fileID: 1343468459}
   noteDisplayImageInvisible: {fileID: 0}
   noteDisplayImageVisible: {fileID: 0}
