@@ -6,6 +6,11 @@ using UnityEngine;
 public class Fireplace : Interactable
 {
     /// <summary>
+    /// The fire game object.
+    /// </summary>
+    [SerializeField] private GameObject fire;
+    
+    /// <summary>
     /// The note that will become visible when interacting with the fireplace.
     /// </summary>
     [SerializeField] private PaperNote fireplaceNote;
@@ -54,6 +59,7 @@ public class Fireplace : Interactable
         
         _audioSource = GetComponent<AudioSource>();
         itemDisplayImageAnimator.SetBool(IsVisible, false);
+        fire.SetActive(false);
     }
     
     /// <summary>
@@ -71,6 +77,7 @@ public class Fireplace : Interactable
     {
         _audioSource.Play();
         
+        fire.SetActive(true);
         GameEvent.ToggleMovement(false, false); // todo: test
         GameEvent.DisplayItem(noteDisplayImageInvisible);
         itemDisplayImageAnimator.SetBool(IsVisible, true);
