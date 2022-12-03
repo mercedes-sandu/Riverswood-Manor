@@ -13,6 +13,11 @@ public class RugSection : MonoBehaviour
     /// The audio source component.
     /// </summary>
     private AudioSource _audioSource;
+    
+    /// <summary>
+    /// The box collider component.
+    /// </summary>
+    private BoxCollider _boxCollider;
 
     /// <summary>
     /// The SteppingOn animator parameter.
@@ -25,17 +30,25 @@ public class RugSection : MonoBehaviour
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        _boxCollider = GetComponent<BoxCollider>();
+        _boxCollider.enabled = true;
         noteAnimator.SetBool(SteppingOn, false);
+    }
+
+    public void RemoveCollider()
+    {
+        _boxCollider.enabled = false;
     }
 
     /// <summary>
     /// If the player steps on this part of the rug, the sound will play and the note will become visible.
     /// </summary>
-    /// <param name="collision">The collision with this part of the rug.</param>
-    private void OnCollisionEnter(Collision collision)
+    /// <param name="other">The collider with this part of the rug.</param>
+    private void OnTriggerEnter(Collider other)
     {
-        if (!collision.collider.CompareTag("Player")) return;
-        
+        Debug.Log("test");
+        if (!other.CompareTag("Player")) return;
+        Debug.Log("player stepped on rug");
         _audioSource.Play();
         noteAnimator.SetBool(SteppingOn, true);
     }
@@ -43,10 +56,10 @@ public class RugSection : MonoBehaviour
     /// <summary>
     /// If the player stops stepping on this part of the rug, the sound will play and the note will become invisible.
     /// </summary>
-    /// <param name="other">The collision with this part of the rug.</param>
-    private void OnCollisionExit(Collision other)
+    /// <param name="other">The collider with this part of the rug.</param>
+    private void OnTriggerExit(Collider other)
     {
-        if (!other.collider.CompareTag("Player")) return;
+        if (!other.CompareTag("Player")) return;
         
         _audioSource.Play();
         noteAnimator.SetBool(SteppingOn, false);

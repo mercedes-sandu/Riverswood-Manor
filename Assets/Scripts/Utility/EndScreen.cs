@@ -23,6 +23,7 @@ public class EndScreen : MonoBehaviour
         
         _canvas = GetComponent<Canvas>();
         _canvas.enabled = false;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>

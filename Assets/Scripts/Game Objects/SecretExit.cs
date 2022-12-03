@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(AudioSource))]
-public class SecretExit : MonoBehaviour
+public class SecretExit : Interactable
 {
     /// <summary>
     /// The audio source component.
@@ -33,14 +32,40 @@ public class SecretExit : MonoBehaviour
         _unlockedSecretDoor = true;
     }
     
-    // todo: remember to make the collider a trigger
+    /// <summary>
+    /// Changes the cursor to interacting.
+    /// </summary>
+    public override void OnFocus()
+    {
+        GameEvent.ChangeCursor(true);
+    }
+    
+    /// <summary>
+    /// Ends the game when the player clicks on the secret exit.
+    /// </summary>
+    public override void OnInteract()
+    {
+        if (!_unlockedSecretDoor) return;
+        
+        _audioSource.Play();
+        GameEvent.EndGame();
+    }
+
+    /// <summary>
+    /// Changes the cursor back to normal.
+    /// </summary>
+    public override void OnLoseFocus()
+    {
+        GameEvent.ChangeCursor(false);
+    }
+
     /// <summary>
     /// Ends the game when the player walks through the secret exit.
     /// </summary>
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
     {
-        if (!_unlockedSecretDoor || !collision.collider.CompareTag("Player")) return;
+        if (!_unlockedSecretDoor || !other.CompareTag("Player")) return;
         
         _audioSource.Play();
         GameEvent.EndGame();

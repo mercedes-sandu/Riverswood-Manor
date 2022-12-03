@@ -34,7 +34,7 @@ public class TeleportWall : Interactable
     /// </summary>
     public override void OnInteract()
     {
-        if (_canClick) FirstPersonController.Instance.transform.position = teleportPoint.position;
+        if (_canClick) GameEvent.TeleportPlayer(teleportPoint);
     }
 
     /// <summary>

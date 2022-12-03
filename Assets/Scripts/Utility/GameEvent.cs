@@ -23,6 +23,11 @@ public static class GameEvent
     public delegate void PaintingHandler();
 
     /// <summary>
+    /// Handles whether the teleport wall has been clicked.
+    /// </summary>
+    public delegate void TeleportWallHandler(Transform newLocation);
+
+    /// <summary>
     /// Handles the player's inventory.
     /// </summary>
     public delegate void InventoryHandler(GameObject item, Sprite icon, Sprite displaySprite);
@@ -71,6 +76,11 @@ public static class GameEvent
     /// Detects when the painting has been clicked
     /// </summary>
     public static event PaintingHandler OnPaintingClick;
+    
+    /// <summary>
+    /// Detects when the teleport wall has been clicked.
+    /// </summary>
+    public static event TeleportWallHandler OnTeleportWallClick;
 
     /// <summary>
     /// Detects when an item has been collected.
@@ -124,6 +134,12 @@ public static class GameEvent
     /// Activates the painting portal to the next scene.
     /// </summary>
     public static void ActivatePaintingPortal() => OnPaintingClick?.Invoke();
+    
+    /// <summary>
+    /// Teleports the player to the specified location.
+    /// </summary>
+    /// <param name="newLocation">The new location for the player.</param>
+    public static void TeleportPlayer(Transform newLocation) => OnTeleportWallClick?.Invoke(newLocation);
 
     /// <summary>
     /// Collects the specified item.

@@ -11,6 +11,16 @@ public class PaperNote : Interactable
     /// The paper note UI display image.
     /// </summary>
     [SerializeField] private Sprite paperNoteDisplay;
+
+    /// <summary>
+    /// True if the note comes from under the rug, false otherwise.
+    /// </summary>
+    [SerializeField] private bool isRugNote = false;
+
+    /// <summary>
+    /// The rug section covering the rug note.
+    /// </summary>
+    [SerializeField] private RugSection rugSection;
     
     /// <summary>
     /// The audio source component.
@@ -41,6 +51,7 @@ public class PaperNote : Interactable
         _audioSource.Play();
         GameEvent.CollectItem(gameObject, paperNoteIcon, paperNoteDisplay);
         GameEvent.DisplayItem(paperNoteDisplay);
+        if (isRugNote) rugSection.RemoveCollider();
         gameObject.SetActive(false);
     }
     

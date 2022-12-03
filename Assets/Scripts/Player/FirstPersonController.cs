@@ -108,7 +108,7 @@ public class FirstPersonController : MonoBehaviour
     /// <summary>
     /// The player's normal standing height.
     /// </summary>
-    [SerializeField] private float standingHeight = 5f;
+    [SerializeField] private float standingHeight = 7f;
 
     /// <summary>
     /// The time it takes for the player to crouch.
@@ -225,6 +225,7 @@ public class FirstPersonController : MonoBehaviour
         }
         
         GameEvent.OnPlayerToggleMovement += ToggleMovement;
+        GameEvent.OnTeleportWallClick += Teleport;
         
         _playerCamera = GetComponentInChildren<Camera>();
         _characterController = GetComponent<CharacterController>();
@@ -422,16 +423,25 @@ public class FirstPersonController : MonoBehaviour
     }
 
     /// <summary>
+    /// Teleports the player to the specified location.
+    /// </summary>
+    /// <param name="newLocation">The new location for the player.</param>
+    private void Teleport(Transform newLocation)
+    {
+        _characterController.enabled = false;
+        transform.position = newLocation.position;
+        _characterController.enabled = true;
+    }
+
+    /// <summary>
     /// Alters the player's height and center to crouch/stand.
     /// </summary>
     /// <returns></returns>
     private IEnumerator CrouchStand()
     {
-        // if (_isCrouching && Physics.Raycast(_playerCamera.transform.position, Vector3.up, 0.5f))
-        //     yield break;
+        if (_isCrouching && Physics.Raycast(_playerCamera.transform.position, Vector3.up, 0.5f))
+            yield break;
 
-        Debug.Log("test");
-        
         _duringCrouchAnimation = true;
 
         float timeElapsed = 0;
@@ -444,8 +454,6 @@ public class FirstPersonController : MonoBehaviour
         {
             _characterController.height = Mathf.Lerp(currentHeight, targetHeight, timeElapsed / timeToCrouch);
             _characterController.center = Vector3.Lerp(currentCenter, targetCenter, timeElapsed / timeToCrouch);
-            Debug.Log(_characterController.height);
-            Debug.Log(_characterController.center);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
@@ -486,5 +494,6 @@ public class FirstPersonController : MonoBehaviour
     void OnDestroy()
     {
         GameEvent.OnPlayerToggleMovement -= ToggleMovement;
+        GameEvent.OnTeleportWallClick -= Teleport;
     }
 }
