@@ -67,5 +67,9 @@ public class PaperNote : Interactable
     /// Changes the paper note display to the new specified sprite.
     /// </summary>
     /// <param name="newDisplay">The new display image.</param>
-    public void ChangePaperNoteDisplay(Sprite newDisplay) => paperNoteDisplay = newDisplay;
+    public void ChangePaperNoteDisplay(Sprite newDisplay)
+    {
+        paperNoteIcon = newDisplay;
+        paperNoteDisplay = newDisplay;
+    }
 }

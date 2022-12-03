@@ -14,17 +14,7 @@ public class Fireplace : Interactable
     /// The note that will become visible when interacting with the fireplace.
     /// </summary>
     [SerializeField] private PaperNote fireplaceNote;
-    
-    /// <summary>
-    /// The display image's animator component.
-    /// </summary>
-    [SerializeField] private Animator itemDisplayImageAnimator;
-    
-    /// <summary>
-    /// The note' invisible display image.
-    /// </summary>
-    [SerializeField] private Sprite noteDisplayImageInvisible;
-    
+
     /// <summary>
     /// The note' invisible display image.
     /// </summary>
@@ -46,11 +36,6 @@ public class Fireplace : Interactable
     private AudioSource _audioSource;
 
     /// <summary>
-    /// The IsVisible animator parameter.
-    /// </summary>
-    private static readonly int IsVisible = Animator.StringToHash("IsVisible");
-
-    /// <summary>
     /// Gets the components and subscribes to GameEvents.
     /// </summary>
     void Start()
@@ -58,7 +43,6 @@ public class Fireplace : Interactable
         GameEvent.OnColoredButtonPressed += OnColoredButtonPressed;
         
         _audioSource = GetComponent<AudioSource>();
-        itemDisplayImageAnimator.SetBool(IsVisible, false);
         fire.SetActive(false);
     }
     
@@ -79,8 +63,7 @@ public class Fireplace : Interactable
         
         fire.SetActive(true);
         GameEvent.ToggleMovement(false, false); // todo: test
-        GameEvent.DisplayItem(noteDisplayImageInvisible);
-        itemDisplayImageAnimator.SetBool(IsVisible, true);
+        GameEvent.DisplayItemAnimated();
         fireplaceNote.ChangePaperNoteDisplay(noteDisplayImageVisible);
     }
     
@@ -103,8 +86,7 @@ public class Fireplace : Interactable
         if (_inputtedColors.Count < correctColorCombination.Length) return;
         
         while (_inputtedColors.Count > 3) _inputtedColors.RemoveAt(0);
-
-        // todo: use .Equals?
+        
         if (correctColorCombination.Where((t, i) => _inputtedColors[i] != t).Any()) return;
 
         GameEvent.UnlockSecretDoor();

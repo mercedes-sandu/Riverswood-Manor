@@ -36,6 +36,11 @@ public static class GameEvent
     /// Handles the player's inventory UI.
     /// </summary>
     public delegate void InventoryUIHandler(Sprite displaySprite);
+
+    /// <summary>
+    /// Handles the player's animated inventory UI.
+    /// </summary>
+    public delegate void InventoryAnimatedUIHandler();
     
     /// <summary>
     /// Handles the inventory menu and cursor.
@@ -91,6 +96,8 @@ public static class GameEvent
     /// Detects when an item is to be displayed in the inventory UI.
     /// </summary>
     public static event InventoryUIHandler OnItemDisplay;
+    
+    public static event InventoryAnimatedUIHandler OnItemDisplayAnimated;
     
     /// <summary>
     /// Detects when the inventory opens/closes and the mouse cursor lock state should be changed.
@@ -155,6 +162,11 @@ public static class GameEvent
     /// </summary>
     /// <param name="displaySprite">The sprite to be displayed.</param>
     public static void DisplayItem(Sprite displaySprite) => OnItemDisplay?.Invoke(displaySprite);
+    
+    /// <summary>
+    /// Displays the specific animated item in the UI.
+    /// </summary>
+    public static void DisplayItemAnimated() => OnItemDisplayAnimated?.Invoke();
     
     /// <summary>
     /// Toggles the cursor's lock state and inventory menu visibility.

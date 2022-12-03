@@ -24,6 +24,11 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Image itemImage;
 
     /// <summary>
+    /// The inventory item animated display image.
+    /// </summary>
+    [SerializeField] private Image animatedItemImage;
+
+    /// <summary>
     /// The item button prefab.
     /// </summary>
     [SerializeField] private GameObject itemButtonPrefab;
@@ -32,6 +37,11 @@ public class InventoryUI : MonoBehaviour
     /// The item image close button.
     /// </summary>
     [SerializeField] private GameObject itemImageCloseButton;
+    
+    /// <summary>
+    /// The animated item image close button.
+    /// </summary>
+    [SerializeField] private GameObject animatedItemImageCloseButton;
     
     /// <summary>
     /// The player's close key.
@@ -44,17 +54,26 @@ public class InventoryUI : MonoBehaviour
     private Canvas _canvas;
 
     /// <summary>
+    /// The item image animator component.
+    /// </summary>
+    private Animator _itemImageAnimator;
+
+    /// <summary>
     /// Subscribes to GameEvents and disables UI elements.
     /// </summary>
     void Awake()
     {
         GameEvent.OnItemCollect += AddItem;
         GameEvent.OnItemDisplay += DisplayItem;
+        GameEvent.OnItemDisplayAnimated += DisplayAnimatedItem;
         GameEvent.OnInventoryMenuToggle += ToggleInventoryMenu;
         
         _canvas = GetComponent<Canvas>();
+        _itemImageAnimator = animatedItemImage.GetComponent<Animator>();
         itemImage.enabled = false;
+        animatedItemImage.enabled = false;
         itemImageCloseButton.SetActive(false);
+        animatedItemImageCloseButton.SetActive(false);
         _canvas.enabled = false;
     }
 
@@ -63,10 +82,10 @@ public class InventoryUI : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(closeKey))
-        {
-            if (itemImage.enabled) CloseItemDisplay();
-        }
+        if (!Input.GetKeyDown(closeKey)) return;
+        
+        if (itemImage.enabled) CloseItemDisplay();
+        if (animatedItemImage.enabled) CloseAnimatedItemDisplay();
     }
     
     /// <summary>
@@ -101,6 +120,17 @@ public class InventoryUI : MonoBehaviour
     }
 
     /// <summary>
+    /// Displays the animated item image.
+    /// </summary>
+    private void DisplayAnimatedItem()
+    {
+        _canvas.enabled = true;
+        animatedItemImage.enabled = true;
+        animatedItemImageCloseButton.SetActive(true);
+        _itemImageAnimator.Play("InventoryImageChange");
+    }
+
+    /// <summary>
     /// Toggles the visibility of the inventory menu.
     /// </summary>
     /// <param name="opening">True if the inventory menu is opening, false otherwise.</param>
@@ -128,7 +158,18 @@ public class InventoryUI : MonoBehaviour
     {
         itemImage.enabled = false;
         itemImageCloseButton.SetActive(false);
+        if (!inventoryPanel.activeSelf) _canvas.enabled = false;
+        GameEvent.ToggleMovement(!inventoryPanel.activeSelf, inventoryPanel.activeSelf);
+    }
 
+    /// <summary>
+    /// Closes the animated item display.
+    /// </summary>
+    public void CloseAnimatedItemDisplay()
+    {
+        animatedItemImage.enabled = false;
+        animatedItemImageCloseButton.SetActive(false);
+        if (!inventoryPanel.activeSelf) _canvas.enabled = false;
         GameEvent.ToggleMovement(!inventoryPanel.activeSelf, inventoryPanel.activeSelf);
     }
 
