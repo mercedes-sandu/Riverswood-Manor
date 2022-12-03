@@ -5,7 +5,6 @@ Next-Gen Furniture Pack: https://assetstore.unity.com/packages/3d/props/furnitur
 Old Classical Chair: https://assetstore.unity.com/packages/3d/props/furniture/old-classical-chair-46865
 Music Box: https://sketchfab.com/3d-models/music-box-prop-d93e0f676d9d41c1a7e33930befc366f
 Wooden Floor Materials: https://assetstore.unity.com/packages/2d/textures-materials/wood/wooden-floor-materials-150564
-Yughues Free Concrete Materials: https://assetstore.unity.com/packages/2d/textures-materials/concrete/yughues-free-concrete-materials-12951
 PBR Materials Sampler Pack: https://assetstore.unity.com/packages/2d/textures-materials/pbr-materials-sampler-pack-40112
 Portrait of a Woman: https://sketchfab.com/3d-models/portrait-of-a-woman-61fdcc3bde184224bb44e20116eb3091
 Crosshairs Plus: https://assetstore.unity.com/packages/2d/gui/icons/crosshairs-plus-139902
