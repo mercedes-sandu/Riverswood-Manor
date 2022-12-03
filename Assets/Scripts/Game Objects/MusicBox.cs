@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Animator))]
 public class MusicBox : Interactable
 {
     /// <summary>
@@ -13,6 +14,11 @@ public class MusicBox : Interactable
     /// The audio source component.
     /// </summary>
     private AudioSource _audioSource;
+
+    /// <summary>
+    /// The animator component.
+    /// </summary>
+    private Animator _animator;
     
     /// <summary>
     /// Gets components.
@@ -20,6 +26,8 @@ public class MusicBox : Interactable
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        _animator = GetComponent<Animator>();
+        _animator.SetBool("Playing", false);
     }
     
     /// <summary>
@@ -31,11 +39,13 @@ public class MusicBox : Interactable
     }
     
     /// <summary>
-    /// Plays the sounds corresponding to the correct order of colored objects.
+    /// Plays the sounds corresponding to the correct order of colored objects and animates the music box.
     /// </summary>
     public override void OnInteract()
     {
+        _animator.SetBool("Playing", true);
         StartCoroutine(PlayAudioClipsSequentially());
+        _animator.SetBool("Playing", false);
     }
     
     /// <summary>
