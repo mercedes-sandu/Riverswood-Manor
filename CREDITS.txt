@@ -31,8 +31,6 @@ Harp Sound Effect: https://www.youtube.com/watch?v=SPUpsb_L6Z4
 Twinkle Sound Effect: https://www.youtube.com/watch?v=BnaudvmKtiI
 Ding Sound Effect: https://www.youtube.com/watch?v=qZC5gtOw3DU
 
-Amplify Color Shader: https://assetstore.unity.com/packages/vfx/shaders/fullscreen-camera-effects/amplify-color-1894
-
 Ferrum Font: https://www.1001fonts.com/ferrum-font.html
 
 Riven Soundtrack - Atrus' Theme: https://www.youtube.com/watch?v=rMOSTOSyNz8
