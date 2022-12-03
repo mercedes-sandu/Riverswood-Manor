@@ -61,6 +61,14 @@ public class ColoredObject : Interactable
     {
         GameEvent.ChangeCursor(false);
     }
+    
+    /// <summary>
+    /// Resets the object animation.
+    /// </summary>
+    public void ResetAnimation()
+    {
+        _animator.SetBool("Interacted", false);
+    }
 
     /// <summary>
     /// Gets the object's associated color.
