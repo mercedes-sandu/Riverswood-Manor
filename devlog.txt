@@ -1,0 +1,81 @@
+Aesthetic goals:
+- Have a mysterious atmosphere that intrigues the character to keep playing
+- Have puzzles that are engaging, but not too easy or challenging, to provide both tension and relief for the player
+
+Signs of success:
+- The player does not give up at any point in the game
+- The player doesn't complete the game very quickly
+
+Signs of failure:
+- The player is bored and gives up
+- The player feels no sense of urgency to complete the game
+
+Core loop:
+- Discover a clue, look around the room, act upon that clue
+- Allows the player to feel like they are progressing in solving the overall puzzle
+
+Log:
+9/22/22:
+- Preliminary design work
+- Sketched out a rough puzzle sequence for the player to undergo
+- Designed the story
+- Drew out a sketch of what the rooms would look like
+- Created Unity project
+
+9/26/22:
+- Implmeneted a preliminary first person controller
+- Implemented player movement
+- Put in basic floor and wall objects
+- Downloaded materials
+- Implemented player interaction with interactable objects
+- Created utility scripts for game events and audio
+- First interactable object: the painting that hides a secret exit from the butler's bedroom
+- Began working on the custom cursor that stays in the center of the screen
+- Downloaded many models to use for the bedroom and the study
+
+
+9/27/22:
+- Redid player movement and interaction using a better script
+- Finished the painting interactable object
+- Created a teleport wall to move from the bedroom to the study
+- Created a paper note object with related UI to read the note
+- Added audio to interactable objects
+- Downloaded more models for the bedroom and study
+
+9/28/2022:
+- Created a door
+- Added UI assets
+- Downloaded more models
+- Started working on the inventory and related UI, finished it
+- Began working on the start menu
+
+9/30/22: 
+- Finished start menu and debugged other UI
+- Finished the butler's bedroom area
+- Started putting down models in the study
+
+12/1/22: 
+- Lots of interactable object scripts:
+	- Colored object
+	- Rug section
+	- Music box
+	- Fireplace
+	- Colored button
+	- Bookcase
+	- Secret exit
+	- End screen
+- Renamed the game to "Riverswood Manor"
+
+12/2/22: 
+- Downloaded more models for the study
+- Implemented actual objects for the scripts written the day prior and added audio where necessary
+
+12/3/22"
+- Debugging and cleanup
+- Removed models and materials that I used to reduce game size
+
+Postmortem:
+Despite having never made a complete 3D game in Unity before, I think this went surprisingly smoothly! I had a lot of fun with finding models and creating the play area.
+None of the scripts were particularly challenging aside from the player controller and interaction, which was a plus! If I had more time, I would've liked to implement
+more sounds such as player footsteps, and maybe even some voice acting for the notes. However, I still think I was able to get everything done that I had initially
+imagined when designing the game. I learned a lot about 3D development and how much more difficult it can be than 2D development, but I am very proud of the final product!
